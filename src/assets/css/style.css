@@ -474,6 +474,7 @@ p.text {
   width: 160px;
   color: #fff;
   background: transparent;
+  text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
 .mein-menu .navbar #navbarNavDropdown ul.navbar-nav li.nav-item .nav-link.button-1:hover, .mein-menu .navbar #navbarNavDropdown ul.navbar-nav li.nav-item .nav-link.button-1.active {
@@ -608,19 +609,19 @@ p.text {
 }
 .global-rates .dots .dot-1 {
   position: absolute;
-  z-index: 1;
+  z-index: -1;
   top: 53%;
   left: 48%;
 }
 .global-rates .dots .dot-2 {
   position: absolute;
-  z-index: 1;
+  z-index: -1;
   top: 34%;
   right: 25%;
 }
 .global-rates .dots .dot-3 {
   position: absolute;
-  z-index: 1;
+  z-index: -1;
   top: 25%;
   left: 40%;
 }
@@ -1092,5 +1093,116 @@ p.text {
   line-height: 50px;
   margin-left: 10px;
 }
+
+
+.lot-card {
+  border-color: #33276a;
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 1.5rem;
+  padding: 20px 60px;
+  z-index: 1;
+}
+.lot-card .title {
+  border-bottom: dashed 3px #33276a;
+}
+
+.lot-card .section-pagination {
+  border-top: dashed 3px #33276a;
+  align-content: center;
+  display: flex;
+}
+
+.section-pagination a{
+  padding: 10px;
+  font-weight: 700;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-decoration: none;
+  font-size: 26px;
+  color: #33276a;
+}
+
+.dots {
+  z-index: -1;
+}
+
+.ticket-table {
+  border: 2px solid #33276a;
+  margin-bottom: 10px;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-table .table-header p {
+  font-size: 24px;
+}
+
+.ml-auto {
+  margin-left: auto !important;
+}
+
+.mr-auto {
+  margin-right: auto !important;
+}
+
+
+@media screen and (max-width: 1450px){
+  .form-group .button-1 {
+    position: relative !important;
+    margin-top: 1rem;
+    width: 100% !important;
+    max-width: 400px !important;
+  }
+}
+
+@media screen and (max-width: 1024px)  {
+  .row {
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  .banner .hero-area .form-group {
+    width: 100%;
+  }
+
+  .form-group .button-1 {
+    position: relative !important;
+    margin-top: 1rem;
+    width: 100% !important;
+    max-width: 400px !important;
+  }
+  
+}
+
+@media screen and (max-width: 540px) {
+  .lottery-input {
+    width: 52px !important;
+    height: 52px !important;
+    padding: 0 10px !important;
+    text-align: center;
+  }  
+
+  .lot-card { 
+    padding: 0px 20px;
+  }
+
+  .lot-card .title {
+    font-size: 28px;
+  }
+
+  .ticket-table .winning-number {
+    font-size: 20px;
+  }
+
+  .ticket-table {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+
 
 /* Scroll To Top End */

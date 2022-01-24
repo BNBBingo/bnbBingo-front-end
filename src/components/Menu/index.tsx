@@ -54,12 +54,6 @@ const Menu = () => {
               <div className="collapse navbar-collapse" id="navbarNavDropdown">
                   <ul className="navbar-nav">
                       <li className="nav-item">
-                          <a className="nav-link active" aria-current="page" href="#about">About</a>
-                      </li>
-                      <li className="nav-item">
-                          <a className="nav-link" href="#features">Features</a>
-                      </li>
-                      <li className="nav-item">
                           <div className="language-select">
                               <select className="select-bar" style={{ display : "none" }}>
                                   <option value="">EN</option>

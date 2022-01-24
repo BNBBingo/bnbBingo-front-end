@@ -16,6 +16,7 @@ import { useShow } from 'state/show/hook'
 import { setTermOfUse, setPrivacyPolicy, setPointSwap } from 'state/show'
 import { useAppDispatch } from '../../state'
 import { useArcadeContext } from 'hooks/useArcadeContext'
+import { ReactComponent as Logo } from 'assets/img/logo.svg'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,13 +65,6 @@ const Footer = () => {
       <div className="footer" style={{backgroundImage: "url(media/footer-bg.png)"}}>
         <div className="container">
 
-            <div className="fdot-one">
-                <img src="./index_files/footert-boll-1.png" alt="" />
-            </div>
-            
-            <div className="fdot-two">
-                <img src="./index_files/footert-boll-1.png" alt="" />
-            </div>
 
             <div className="col-12">
                 <div className="subscribe-content" style={{ backgroundImage: "url(media/subscribe-bg.png)" }}>
@@ -95,7 +89,7 @@ const Footer = () => {
             <div className="row justify-content-between">
                 <div className="col-lg-3 col-md-6 wow fadeInUp" data-wow-duration="0.3s" data-wow-delay="0.3s" style={{visibility: "visible", animationDuration: "0.3s", animationDelay: "0.3s", animationName: "fadeInUp"}}>
                     <div className="footer-box">
-                        <a href="#" className="logo"><img src="./media/logo.png" alt=""/></a>
+                        <Logo width={200} height={80}/>
                         <p className="text">Safe, secure, &amp; innovative crypto currency borrow &amp;
                             lending solutions.</p>
                     </div>
@@ -149,15 +143,9 @@ const Footer = () => {
                 <div className="col-12 text-center">
                     <div className="footer-bottom">
                         <div className="content wow fadeInUp" data-wow-duration="0.3s" data-wow-delay="0.3s" style={{visibility: "visible", animationDuration: "0.3s", animationDelay: "0.3s", animationName: "fadeInUp"}}>
-                            <p className="text">Copyright © 2021. All Rights Reserved By <a href="#">Gooland</a></p>
+                            <p className="text">Copyright © 2021. All Rights Reserved By <a href="#">BNBBingo</a></p>
                         </div>
-                        <div className="social-style wow fadeInUp" data-wow-duration="0.3s" data-wow-delay="0.3s" style={{visibility: "visible", animationDuration: "0.3s", animationDelay: "0.3s", animationName: "fadeInUp"}}>
-                            <a href="#"><i className="fab fa-facebook-f"></i></a>
-                            <a href="#"><i className="fab fa-twitter"></i></a>
-                            <a href="#"><i className="fab fa-pinterest-p"></i></a>
-                            <a href="#"><i className="fab fa-google-plus-g"></i></a>
-                            <a href="#"><i className="fab fa-instagram"></i></a>
-                        </div>
+
                     </div>
                 </div>
             </div>
