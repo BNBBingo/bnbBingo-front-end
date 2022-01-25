@@ -1152,13 +1152,13 @@ p.text {
   font-weight: 700;
 }
 
-.ticket-table .btn-status-4 {
+.ticket-table .btn-status-2 {
   background-color: #79ff8e;
   color: #3e6019;
   font-weight: 700;
 }
 
-.ticket-table .btn-status-0 {
+.ticket-table .btn-status-1 {
   background-color: #3e19ff;
   color: #ffffff;
 }

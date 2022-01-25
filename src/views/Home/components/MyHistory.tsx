@@ -12,6 +12,8 @@ import { useArcadeContext } from 'hooks/useArcadeContext'
 import { useLottery } from 'hooks/useContract'
 import * as Wallet from 'global/wallet'
 import { setIsLoading } from 'state/show'
+import * as CONST from 'global/const'
+import numeral from 'numeral'
 
 
 const MyHistory: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
@@ -41,22 +43,22 @@ const MyHistory: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, .
 					res.data[i].finalNumber = finalNumber;
 				}
 
-				const ticketInfo = await lottery.methods.tickets(res.data[i].ticket_id).call();
-				if (ticketInfo.claimed) {
-					res.data[i].status = 4;
-				} else {
-					const lotteryInfo = await lottery.methods.lotteries(res.data[i].round).call();
-					res.data[i].status = parseInt(lotteryInfo.status);
-				}
+				// const ticketInfo = await lottery.methods.tickets(res.data[i].ticket_id).call();
+				// if (ticketInfo.claimed) {
+				// 	res.data[i].status = 4;
+				// } else {
+				// 	const lotteryInfo = await lottery.methods.lotteries(res.data[i].round).call();
+				// 	res.data[i].status = parseInt(lotteryInfo.status);
+				// }
 
-				if (res.data[i].status === 0 || res.data[i].status === 4) {
-					try {
-						const prizeInfo = await lottery.methods.getPrize(res.data[i].ticket_id).call();
-						res.data[i].prize = Web3.utils.fromWei(prizeInfo + '', 'ether');
-					} catch{
-						res.data[i].prize = undefined;
-					}
-				}
+				// if (res.data[i].status === 0 || res.data[i].status === 4) {
+				// 	try {
+				// 		const prizeInfo = await lottery.methods.getPrize(res.data[i].ticket_id).call();
+				// 		res.data[i].prize = Web3.utils.fromWei(prizeInfo + '', 'ether');
+				// 	} catch{
+				// 		res.data[i].prize = undefined;
+				// 	}
+				// }
 			}
 			setTickets(res.data);
 		})
@@ -152,13 +154,14 @@ const MyHistory: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, .
 																			</div>
 																			<div className='flex-row'>
 																					<p>Round: {ticket.round}</p>
-																					<p>Prize: {ticket.status != 0 && ticket.status != 4 ? '-' : ticket.prize}</p> 
+																					<p>Prize: {ticket.status != CONST.TICKET_STATUS.CLAIMABLE? `${numeral(ticket.prize).format('0,0.0[000]')} BNB`: '-'}</p> 
 																			</div>
 																			<div className='flex-row'>
 																					<button className={`btn-status-${ticket.status}`} onClick={() => onClickClaim(ticket.ticket_id, ind)} disabled={ticket.status !== 0}>
 																						{
-																							ticket.status === 0 ? 'Claim Now' :
-																							ticket.status === 4 ? 'Claimed'	: 'On-Going'
+																							ticket.status === CONST.TICKET_STATUS.PURCHASED ? 'On-Going' :
+																							ticket.status === CONST.TICKET_STATUS.CLAIMABLE ? 'Claim Now'	: 
+																							ticket.status === CONST.TICKET_STATUS.CLAIMED? 'Claimed': 'No Prize'
 																						}
 																					</button> 
 																			</div>

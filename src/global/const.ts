@@ -25,3 +25,10 @@ export const SORT_TYPE = {
   PRICE_LOW_HIGH: 3,
   POPULAR: 4,
 }
+
+export const TICKET_STATUS = {
+  PURCHASED: 0,
+  CLAIMABLE: 1,
+  CLAIMED: 2,
+  NO_PRIZE: 3
+}
