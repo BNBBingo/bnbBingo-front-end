@@ -174,7 +174,6 @@ button:focus {
   border-radius: 30px;
   width: 160px;
   height: 50px;
-  text-transform: uppercase;
   background: linear-gradient(45deg, #903eff 0%, #3e19ff 100%);
 }
 .button-1:hover {
