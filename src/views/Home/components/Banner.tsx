@@ -49,6 +49,12 @@ const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...p
         Swal.fire("Cannot input the same number!");
         return;
     }
+
+    if (t1 > 32 || t2 > 32 || t3 > 32 || t4 > 32 || t5 > 32 || t6 > 32) {
+        Swal.fire("Please input the number in the range!");
+        return;
+    }
+
     dispatch(setIsLoading(true));
     Wallet.sendTransactionWithValue(
         lottery.methods.buyTicket(numbers), 
