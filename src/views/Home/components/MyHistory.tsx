@@ -77,7 +77,7 @@ const MyHistory: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, .
 					dispatch(setIsLoading(false));
 					Swal.fire("Ticket claimed successfully!");
 					let tmpTicket = [...tickets];
-					tmpTicket[index].status = 4;
+					tmpTicket[index].status = CONST.TICKET_STATUS.CLAIMED;
 					setTickets(tmpTicket);
 			})
 			.catch((ex) => {
@@ -157,7 +157,7 @@ const MyHistory: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, .
 																					<p>Prize: {ticket.status != CONST.TICKET_STATUS.CLAIMABLE? `${numeral(ticket.prize).format('0,0.0[000]')} BNB`: '-'}</p> 
 																			</div>
 																			<div className='flex-row'>
-																					<button className={`btn-status-${ticket.status}`} onClick={() => onClickClaim(ticket.ticket_id, ind)} disabled={ticket.status !== 0}>
+																					<button className={`btn-status-${ticket.status}`} onClick={() => onClickClaim(ticket.ticket_id, ind)} disabled={ticket.status !== CONST.TICKET_STATUS.CLAIMABLE}>
 																						{
 																							ticket.status === CONST.TICKET_STATUS.PURCHASED ? 'On-Going' :
 																							ticket.status === CONST.TICKET_STATUS.CLAIMABLE ? 'Claim Now'	: 
