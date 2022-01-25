@@ -108,6 +108,10 @@ const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...p
   }, []);
 
   const intervalDuration = () => {
+    if (43200 - (Date.now() / 1000) % 43200 <= 0) {
+        //TO DO
+        // Refresh contents using redux or global state
+    }
     setDuration(43200 - (Date.now() / 1000) % 43200);
   }
 
