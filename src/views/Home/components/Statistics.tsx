@@ -10,6 +10,7 @@ import { useArcadeContext } from 'hooks/useArcadeContext'
 import { useLottery } from 'hooks/useContract'
 import Web3 from 'web3'
 import numeral from 'numeral'
+import * as CONST from 'global/const'
 
 const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const dispatch = useAppDispatch()
@@ -25,8 +26,19 @@ const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, 
     lottery.methods.currentLotteryId().call()
     .then((res: string) => {
         const round = parseInt(res);
-        setLastRound(round);
-        setCurrentRound(round > 1 ? round - 1 : 0);
+        lottery.methods.lotteries(round).call()
+        .then((lotteryRes: any) => {
+            if (parseInt(lotteryRes.status) === CONST.ROUND_STATUS.CLAIMED) {
+                setLastRound(round);
+                setCurrentRound(round);
+            } else {
+                setLastRound(round > 1 ? round - 1 : 0);
+                setCurrentRound(round > 1 ? round - 1 : 0);
+            }
+        })
+        .catch((ex: any) => {
+            console.log(ex);
+        })
     })
     .catch((ex: any) => {
         console.log(ex);
@@ -70,7 +82,7 @@ const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, 
 
   const onNext = () => {
     if (!currentRound || !lastRound) return;
-    if (currentRound < lastRound - 1) {
+    if (currentRound < lastRound) {
         setCurrentRound(currentRound + 1);
     }
   }

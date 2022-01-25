@@ -32,3 +32,9 @@ export const TICKET_STATUS = {
   CLAIMED: 2,
   NO_PRIZE: 3
 }
+
+export const ROUND_STATUS = {
+  CLAIMED: 0,
+  STARTED: 1,
+  STOPED: 2
+}
