@@ -4,6 +4,7 @@ import EXCHANGE_ABI from 'contracts/EXCHANGE.json'
 import ERC721_ABI from 'contracts/ERC721.json'
 import SWAP_ABI from 'contracts/SWAP.json'
 import BEP20PRICE_ABI from 'contracts/BEP20Price.json'
+import LOTTERY_ABI from 'contracts/Lottery.json'
 import { AbiItem } from 'web3-utils'
 import { useArcadeContext } from './useArcadeContext'
 
@@ -91,4 +92,11 @@ export const useGameUserInfo = (address: string | undefined) => {
   }, [swapContract, address])
 
   return { weightedAverage }
+}
+
+export const useLottery = (address: string) => {
+  const { web3 } = useArcadeContext() 
+  return useMemo(() => {
+    return new web3.eth.Contract(LOTTERY_ABI as AbiItem[], process.env.REACT_APP_LOTTERY_ADDRESS, { from: address })
+  }, [web3, address])
 }

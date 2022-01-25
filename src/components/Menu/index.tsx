@@ -1,5 +1,5 @@
-import React, { memo } from 'react'
-import { AppBar, Toolbar } from '@material-ui/core'
+import React, { memo, useCallback } from 'react'
+import { AppBar, Hidden, Toolbar } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import clsx from 'clsx'
 
@@ -11,6 +11,8 @@ import { ReactComponent as Wallet } from 'assets/img/wallet.svg'
 import { setWalletMenu, setHiddenMenu } from 'state/show'
 import { useAppDispatch } from 'state'
 import { useArcadeContext } from 'hooks/useArcadeContext'
+import SelectWalletModal from 'components/Modal/SelectWallet'
+import { useShow } from 'state/show/hook'
 
 const useStyles = makeStyles(() => ({
   appBar: {
@@ -31,11 +33,20 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
+
+
 const Menu = () => {
   const dispatch = useAppDispatch()
   const classes = useStyles()
   const commonClasses = useCommonStyles()
   const { fullscreen } = useArcadeContext()
+  const { walletMenu, hiddenMenu } = useShow()
+  const { account, updateConnect, connectType } = useArcadeContext()
+  const shortenString = useCallback((source: string) => {
+    if (source.length <= 12) return source
+  
+    return '********' + source.substring(source.length - 6, source.length)
+  }, [])
 
   const onConnectWalletHandler = async () => {
     dispatch(setWalletMenu(true))
@@ -63,7 +74,10 @@ const Menu = () => {
                           </div>
                       </li>
                       <li className="nav-item">
-                          <a className="nav-link button-1" href="#">Connect</a>
+                          <a className="nav-link button-1" onClick={onConnectWalletHandler}>{account ? shortenString(account) : 'Connect'}</a>
+                          <Hidden xsDown>
+                            <SelectWalletModal open={walletMenu} connectedWallet={Number(connectType)}/>
+                          </Hidden>
                       </li>
                   </ul>
               </div>

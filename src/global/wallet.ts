@@ -272,3 +272,11 @@ export const sendTransaction = async (transaction: any, account: string | undefi
     return transaction.send({ from: account, gas: gasAmount/*, gasPrice: parseInt(gasData.result, 16).toString()*/ })
   })
 }
+
+export const sendTransactionWithValue = async (transaction: any, account: string | undefined, value: any) => {
+
+  return transaction.estimateGas({ from: account, value: value })
+  .then(async (gasAmount: any) => { 
+    return transaction.send({ from: account, gas: gasAmount, value: value })
+  })
+}

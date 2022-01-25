@@ -177,4 +177,13 @@ export const getVerificationCode = async (game_id: number, address: string, amou
   return response
 }
 
+export const getTickets = async (address: string, limit: number, offset: number): Promise<any> => {
+  const response = await sendPost('/tickets', {
+    address: address,
+    limit: limit,
+    offset: offset
+  })
+  return response
+}
+
 

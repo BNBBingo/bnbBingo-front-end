@@ -4,8 +4,8 @@ import Switch from '@material-ui/core/Switch'
 
 const IOSSwitch = styled((props) => <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />)(
   ({ theme }) => ({
-    width: 43,
-    height: 18,
+    width: 60,
+    height: 30,
     padding: 2,
     '& .MuiSwitch-switchBase': {
       padding: 0,
@@ -35,8 +35,8 @@ const IOSSwitch = styled((props) => <Switch focusVisibleClassName=".Mui-focusVis
     },
     '& .MuiSwitch-thumb': {
       boxSizing: 'border-box',
-      width: 17,
-      height: 11,
+      width: 34,
+      height: 21,
       margin: 2,
       borderRadius: 11,
     },

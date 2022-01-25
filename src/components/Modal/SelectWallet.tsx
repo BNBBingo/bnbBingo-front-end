@@ -27,7 +27,6 @@ const SelectWalletModal: React.FC<Props> = (props) => {
       <div className="wallet-select-modal">
         <div id="back" onClick={() => dispatch(setWalletMenu(false))}/>
         <div id="content">
-          <img src={Triangle} alt="triangle" id="triangle"/>
           <div className="modal-content">
             <p id='title'>Choose a Wallet</p>
             <WalletItem 
