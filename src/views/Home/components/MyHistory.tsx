@@ -154,7 +154,7 @@ const MyHistory: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, .
 																			</div>
 																			<div className='flex-row'>
 																					<p>Round: {ticket.round}</p>
-																					<p>Prize: {ticket.status != CONST.TICKET_STATUS.CLAIMABLE? `${numeral(ticket.prize).format('0,0.0[000]')} BNB`: '-'}</p> 
+																					<p>Prize: {ticket.status === CONST.TICKET_STATUS.CLAIMABLE || ticket.status === CONST.TICKET_STATUS.CLAIMED? `${numeral(ticket.prize).format('0,0.0[000]')} BNB`: '-'}</p> 
 																			</div>
 																			<div className='flex-row'>
 																					<button className={`btn-status-${ticket.status}`} onClick={() => onClickClaim(ticket.ticket_id, ind)} disabled={ticket.status !== CONST.TICKET_STATUS.CLAIMABLE}>
