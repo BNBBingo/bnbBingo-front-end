@@ -29,6 +29,7 @@ const MyHistory: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, .
 
 	const getMyTickets = async () => {
 		if (!account) return;
+		setTickets([]);
 		getTickets(account, limit, offset)
 		.then(async res => {
 			setTotal(res.total);
@@ -65,7 +66,7 @@ const MyHistory: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, .
 		getMyTickets();
 	}, [account, limit, offset])
 
-	const onClickClaim = (ticketId: any) => {
+	const onClickClaim = (ticketId: any, index: any) => {
 		dispatch(setIsLoading(true));
 		Wallet.sendTransaction(
 			lottery.methods.claimTicket(ticketId), 
@@ -73,6 +74,9 @@ const MyHistory: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, .
 			.then((res: any) => {
 					dispatch(setIsLoading(false));
 					Swal.fire("Ticket claimed successfully!");
+					let tmpTicket = [...tickets];
+					tmpTicket[index].status = 4;
+					setTickets(tmpTicket);
 			})
 			.catch((ex) => {
 					dispatch(setIsLoading(false));
@@ -117,9 +121,9 @@ const MyHistory: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, .
                             </div>
                             <div className="section-rounds">
 															{
-																tickets.map(ticket => {
+																tickets.map((ticket, ind) => {
 																	return (
-																		<div className='ticket-table'>
+																		<div className='ticket-table' key={`ticket_${ticket.id}`}>
 																			<div className='flex-row'>
 																					<p>Number:</p>
 																					<p className='number'>
@@ -151,7 +155,7 @@ const MyHistory: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, .
 																					<p>Prize: {ticket.status != 0 && ticket.status != 4 ? '-' : ticket.prize}</p> 
 																			</div>
 																			<div className='flex-row'>
-																					<button className={`btn-status-${ticket.status}`} onClick={() => onClickClaim(ticket.ticket_id)} disabled={ticket.status !== 0}>
+																					<button className={`btn-status-${ticket.status}`} onClick={() => onClickClaim(ticket.ticket_id, ind)} disabled={ticket.status !== 0}>
 																						{
 																							ticket.status === 0 ? 'Claim Now' :
 																							ticket.status === 4 ? 'Claimed'	: 'On-Going'

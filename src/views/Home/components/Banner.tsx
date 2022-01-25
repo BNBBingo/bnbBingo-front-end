@@ -25,6 +25,9 @@ const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...p
   const [t5, setT5] = useState<number | undefined>();
   const [t6, setT6] = useState<number | undefined>();
 
+  const onChangeInput = (ev: any, callbackFunc: any) => {
+
+  }
 
   const onBuyTicket = () => {
     if (!t1 || !t2 || !t3 || !t4 || !t5 || !t6 ) {
@@ -93,12 +96,12 @@ const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...p
                             <h1 className="head">A Better Way To Do Money</h1>
                         </div>
                         <div className="form-group row">
-                            <input type="text" className="form-control lottery-input" value={t1} onChange={(e)=>setT1(parseInt(e.target.value))}/>
-                            <input type="text" className="form-control lottery-input" value={t2} onChange={(e)=>setT2(parseInt(e.target.value))}/>
-                            <input type="text" className="form-control lottery-input" value={t3} onChange={(e)=>setT3(parseInt(e.target.value))}/>
-                            <input type="text" className="form-control lottery-input" value={t4} onChange={(e)=>setT4(parseInt(e.target.value))}/>
-                            <input type="text" className="form-control lottery-input" value={t5} onChange={(e)=>setT5(parseInt(e.target.value))}/>
-                            <input type="text" className="form-control lottery-input" value={t6} onChange={(e)=>setT6(parseInt(e.target.value))}/>
+                            <input type="number" min="1" max="32" className="form-control lottery-input" value={t1} onChange={(e)=>setT1(parseInt(e.target.value))}/>
+                            <input type="number" min="1" max="32" className="form-control lottery-input" value={t2} onChange={(e)=>setT2(parseInt(e.target.value))}/>
+                            <input type="number" min="1" max="32" className="form-control lottery-input" value={t3} onChange={(e)=>setT3(parseInt(e.target.value))}/>
+                            <input type="number" min="1" max="32" className="form-control lottery-input" value={t4} onChange={(e)=>setT4(parseInt(e.target.value))}/>
+                            <input type="number" min="1" max="32" className="form-control lottery-input" value={t5} onChange={(e)=>setT5(parseInt(e.target.value))}/>
+                            <input type="number" min="1" max="32" className="form-control lottery-input" value={t6} onChange={(e)=>setT6(parseInt(e.target.value))}/>
                             <button className="button-1" onClick={onBuyTicket}>Buy Now!</button>
                         </div>
                         <div className="lottery-prize">

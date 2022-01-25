@@ -15,7 +15,7 @@ const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, 
   const { account } = useArcadeContext();
   const lottery = useLottery(account ?? '');
   const [currentRound, setCurrentRound] = useState<number|undefined>();
-  const [lastRound, setLastRound] = useState<number|undefined>();
+  const [lastRound, setLastRound] = useState<number>(0);
   const [totalPrize, setTotalPrize] = useState<string>('');
   const [finalNumber, setFinalNumber] = useState([]);
 	const [divisionRate, setDivisionRate] = useState([]);
@@ -25,7 +25,7 @@ const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, 
     .then((res: string) => {
         const round = parseInt(res);
         setLastRound(round);
-        setCurrentRound(round > 1 ? round - 1 : undefined);
+        setCurrentRound(round > 1 ? round - 1 : 0);
     })
     .catch((ex: any) => {
         console.log(ex);
