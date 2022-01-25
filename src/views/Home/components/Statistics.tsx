@@ -9,6 +9,7 @@ import { useAppDispatch } from 'state'
 import { useArcadeContext } from 'hooks/useArcadeContext'
 import { useLottery } from 'hooks/useContract'
 import Web3 from 'web3'
+import numeral from 'numeral'
 
 const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const dispatch = useAppDispatch()
@@ -43,7 +44,7 @@ const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, 
         console.log(ex);
     })
 
-		lottery.methods.getLotteryFinalNumber(currentRound).call()
+    lottery.methods.getLotteryFinalNumber(currentRound).call()
     .then((res: any) => {
 			setFinalNumber(res);
     })
@@ -51,7 +52,7 @@ const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, 
         console.log(ex);
     })
 
-		lottery.methods.getLotteryPrizeDivision(currentRound).call()
+    lottery.methods.getLotteryPrizeDivision(currentRound).call()
     .then((res: any) => {
 			setDivisionRate(res);
     })
@@ -130,21 +131,21 @@ const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, 
 
                             <div className='row round-row'>
                                 <p>Prize - </p>
-                                <p className="winning-number"> {totalPrize} BNB</p>
+                                <p className="winning-number"> {numeral(totalPrize).format('0,0.0[000]')} BNB</p>
                             </div>
 
-														<div className='row round-row'>
-															<p>Match One: {parseFloat(totalPrize) * divisionRate[0] / 100} BNB</p>
-															<p>Match Two: {parseFloat(totalPrize) * divisionRate[1] / 100} BNB</p>
-														</div>
-														<div className='row round-row'>
-															<p>Match Three: {parseFloat(totalPrize) * divisionRate[2] / 100} BNB</p>
-															<p>Match Four: {parseFloat(totalPrize) * divisionRate[3] / 100} BNB</p>
-														</div>
-														<div className='row round-row bingo'>
-															<p>Match Five: {parseFloat(totalPrize) * divisionRate[4] / 100} BNB</p>
-															<p className='big-bingo'>Match Bingo!: {parseFloat(totalPrize) * divisionRate[5] / 100} BNB</p>
-														</div>
+                            <div className='row round-row'>
+                                <p>Match One: {numeral(parseFloat(totalPrize) * divisionRate[0] / 100).format('0,0.0[000]')} BNB</p>
+                                <p>Match Two: {numeral(parseFloat(totalPrize) * divisionRate[1] / 100).format('0,0.0[000]')} BNB</p>
+                            </div>
+                            <div className='row round-row'>
+                                <p>Match Three: {numeral(parseFloat(totalPrize) * divisionRate[2] / 100).format('0,0.0[000]')} BNB</p>
+                                <p>Match Four: {numeral(parseFloat(totalPrize) * divisionRate[3] / 100).format('0,0.0[000]')} BNB</p>
+                            </div>
+                            <div className='row round-row bingo'>
+                                <p>Match Five: {numeral(parseFloat(totalPrize) * divisionRate[4] / 100).format('0,0.0[000]')} BNB</p>
+                                <p className='big-bingo'>Match Bingo!: {numeral(parseFloat(totalPrize) * divisionRate[5] / 100).format('0,0.0[000]')} BNB</p>
+                            </div>
                         </div>
                         <div className="section-pagination">
                             <a onClick={onFirst} className="ml-auto">&lt;&lt;</a>

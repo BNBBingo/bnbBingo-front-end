@@ -64,7 +64,7 @@ const Menu = () => {
               </button>
               <div className="collapse navbar-collapse" id="navbarNavDropdown">
                   <ul className="navbar-nav">
-                      <li className="nav-item">
+                      {/* <li className="nav-item">
                           <div className="language-select">
                               <select className="select-bar" style={{ display : "none" }}>
                                   <option value="">EN</option>
@@ -72,7 +72,7 @@ const Menu = () => {
                                   <option value="">BN</option>
                               </select><div className="nice-select select-bar"><span className="current">EN</span><ul className="list"><li data-value="" className="option selected">EN</li><li data-value="" className="option">IN</li><li data-value="" className="option">BN</li></ul></div>
                           </div>
-                      </li>
+                      </li> */}
                       <li className="nav-item">
                           <a className="nav-link button-1" onClick={onConnectWalletHandler}>{account ? shortenString(account) : 'Connect'}</a>
                           <Hidden xsDown>

@@ -10,6 +10,7 @@ import { useLottery } from 'hooks/useContract'
 import Web3 from 'web3'
 import BigNumber from 'bignumber.js'
 import { setIsLoading } from 'state/show'
+import numeral from 'numeral'
 
 const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const dispatch = useAppDispatch()
@@ -105,7 +106,7 @@ const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...p
                             <button className="button-1" onClick={onBuyTicket}>Buy Now!</button>
                         </div>
                         <div className="lottery-prize">
-                            {currentPrize?.toPrecision(3).toString()} BNB on prizes
+                            {numeral(currentPrize).format('0,0.0[000]')} BNB on prizes
                         </div>
                     </div>
                 </div>
