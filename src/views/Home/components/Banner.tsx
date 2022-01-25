@@ -17,6 +17,7 @@ const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...p
   const { account } = useArcadeContext();
   const lottery = useLottery(account ?? '');
   const [currentPrize, setCurrentPrize] = useState<BigNumber>();
+  const [duration, setDuration] = useState(0);
 
 
   const [t1, setT1] = useState<number | undefined>();
@@ -91,6 +92,25 @@ const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...p
     dispatch(setWalletMenu(true))
   }
 
+  const getDuration = (duration: number) => {
+      let ret = '';
+      if (duration >= 3600) {
+        ret = `${Math.floor(duration / 3600)}h ${Math.floor((duration % 3600) / 60)}m`;
+      } else {
+        ret = `${Math.floor(duration / 60)}m ${duration % 60}s`;
+      }
+
+      return ret;
+  }
+
+  useEffect(() => {
+    setInterval(intervalDuration, 1000);
+  }, []);
+
+  const intervalDuration = () => {
+    setDuration(43200 - (Date.now() / 1000) % 43200);
+  }
+
   return (
     <div className="banner" id="home" style={{backgroundImage: "url(media/banner-bg.png)"}}>
         <img className="bg-sape" src="media/banner-bg-2.png" alt="" />
@@ -109,7 +129,7 @@ const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...p
                             <input type="number" min="1" max="32" className="form-control lottery-input" value={t4} onChange={(e)=>setT4(parseInt(e.target.value))}/>
                             <input type="number" min="1" max="32" className="form-control lottery-input" value={t5} onChange={(e)=>setT5(parseInt(e.target.value))}/>
                             <input type="number" min="1" max="32" className="form-control lottery-input" value={t6} onChange={(e)=>setT6(parseInt(e.target.value))}/>
-                            <button className="button-1" onClick={onBuyTicket}>Buy Now!</button>
+                            <button className="button-1" onClick={onBuyTicket}>Buy Now<br/>({getDuration(duration)}) </button>
                         </div>
                         <div className="lottery-prize">
                             {numeral(currentPrize).format('0,0.0[000]')} BNB on prizes

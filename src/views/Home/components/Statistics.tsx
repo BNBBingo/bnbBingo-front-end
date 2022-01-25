@@ -15,12 +15,13 @@ import * as CONST from 'global/const'
 const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const dispatch = useAppDispatch()
   const { account } = useArcadeContext();
-  const lottery = useLottery(account ?? '');
+  const lottery = useLottery(account?? '');
   const [currentRound, setCurrentRound] = useState<number|undefined>();
   const [lastRound, setLastRound] = useState<number>(0);
   const [totalPrize, setTotalPrize] = useState<string>('');
   const [finalNumber, setFinalNumber] = useState([]);
-	const [divisionRate, setDivisionRate] = useState([]);
+  const [divisionRate, setDivisionRate] = useState([]);
+  const [finishedAt, setFinishedAt] = useState(0);
 
   const getCurrentRound = () => {
     lottery.methods.currentLotteryId().call()
@@ -50,7 +51,8 @@ const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, 
     if (!currentRound) return;
     lottery.methods.lotteries(currentRound).call()
     .then((res: any) => {
-			setTotalPrize(Web3.utils.fromWei(res.totalPrize + '', 'ether'))
+        setTotalPrize(Web3.utils.fromWei(res.totalPrize + '', 'ether'))
+        setFinishedAt(parseInt(res.endTime) * 1000);
     })
     .catch((ex: any) => {
         console.log(ex);
@@ -58,7 +60,7 @@ const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, 
 
     lottery.methods.getLotteryFinalNumber(currentRound).call()
     .then((res: any) => {
-			setFinalNumber(res);
+        setFinalNumber(res);
     })
     .catch((ex: any) => {
         console.log(ex);
@@ -75,10 +77,10 @@ const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, 
   }, [currentRound])
 
   useEffect(() => {
-    if (!account) return;
+    // if (!account) return;
 
     getCurrentRound();
-  }, [account])
+  }, [])
 
   const onNext = () => {
     if (!currentRound || !lastRound) return;
@@ -130,6 +132,13 @@ const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, 
                             <div className='row round-row'>
                                 <p>Round - </p>
                                 <input type="text" value={currentRound} onChange={(e)=>setCurrentRound(parseInt(e.target.value))}/>
+                            </div>
+
+                            <div className='row round-row'>
+                                <p>Finished - </p>
+                                <p className="winning-number">
+                                    { finishedAt === 0? ' ': new Date(finishedAt).toLocaleString().replace(',', '') }
+                                </p>
                             </div>
 
                             <div className='row round-row'>
