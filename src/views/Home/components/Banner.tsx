@@ -9,7 +9,7 @@ import { useArcadeContext } from 'hooks/useArcadeContext'
 import { useLottery } from 'hooks/useContract'
 import Web3 from 'web3'
 import BigNumber from 'bignumber.js'
-import { setIsLoading } from 'state/show'
+import { setIsLoading, setRefreshInterface } from 'state/show'
 import numeral from 'numeral'
 
 const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
@@ -27,8 +27,8 @@ const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...p
   const [t5, setT5] = useState<number | undefined>();
   const [t6, setT6] = useState<number | undefined>();
 
-  const onChangeInput = (ev: any, callbackFunc: any) => {
-
+  const onConnectWalletHandler = async () => {
+    dispatch(setWalletMenu(true))
   }
 
   const onBuyTicket = () => {
@@ -53,6 +53,11 @@ const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...p
 
     if (t1 > 32 || t2 > 32 || t3 > 32 || t4 > 32 || t5 > 32 || t6 > 32) {
         Swal.fire("Please input the number in the range!");
+        return;
+    }
+
+    if (!account) {
+        onConnectWalletHandler();
         return;
     }
 
@@ -88,9 +93,6 @@ const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...p
     getCurrentPrize();
   }, [account])
 
-  const onConnectWalletHandler = async () => {
-    dispatch(setWalletMenu(true))
-  }
 
   const getDuration = (duration: number) => {
       let ret = '';
@@ -109,8 +111,7 @@ const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...p
 
   const intervalDuration = () => {
     if (43200 - (Date.now() / 1000) % 43200 <= 0) {
-        //TO DO
-        // Refresh contents using redux or global state
+        dispatch(setRefreshInterface(true));
     }
     setDuration(43200 - (Date.now() / 1000) % 43200);
   }

@@ -11,6 +11,7 @@ const initialState: ShowState = {
   hiddenMenu: 'hidden-menu',
   discussionRule: false,
   commentState: 0,
+  refreshInterface: false
 }
 
 const showSlice = createSlice({
@@ -44,6 +45,9 @@ const showSlice = createSlice({
     setCommentState: (state, action: PayloadAction<number>) => {
       state.commentState = action.payload
     },
+    setRefreshInterface: (state, action: PayloadAction<boolean>) => {
+      state.refreshInterface = action.payload
+    }
   }
 })
 
@@ -57,6 +61,7 @@ export const {
   setHiddenMenu,
   setDiscussionRule,
   setCommentState,
+  setRefreshInterface
 } = showSlice.actions
 
 export default showSlice.reducer

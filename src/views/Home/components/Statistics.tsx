@@ -8,12 +8,14 @@ import { setWalletMenu } from 'state/show'
 import { useAppDispatch } from 'state'
 import { useArcadeContext } from 'hooks/useArcadeContext'
 import { useLottery } from 'hooks/useContract'
+import { useShow } from 'state/show/hook'
 import Web3 from 'web3'
 import numeral from 'numeral'
 import * as CONST from 'global/const'
 
 const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const dispatch = useAppDispatch()
+  const { refreshInterface } = useShow();
   const { account } = useArcadeContext();
   const lottery = useLottery(account?? '');
   const [currentRound, setCurrentRound] = useState<number|undefined>();
@@ -78,7 +80,7 @@ const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, 
 
   useEffect(() => {
     getCurrentRound();
-  }, [])
+  }, [refreshInterface])
 
   const onNext = () => {
     if (!currentRound || !lastRound) return;

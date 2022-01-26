@@ -1,65 +1,8 @@
-import React, { memo, useCallback } from 'react'
-import { AppBar, Hidden } from '@material-ui/core'
-import Grid from '@material-ui/core/Grid'
-import { makeStyles } from '@material-ui/core/styles'
-import clsx from 'clsx'
-
-import FooterContact from './FooterContact'
-import FooterRoadmap from './FooterRoadmap'
-import FooterFollowUs from './FooterFollowUs'
-import TermOfUse from 'components/Modal/TermOfUse'
-import PrivacyPolicy from 'components/Modal/PrivacyPolicy'
-import PointSwap from 'components/Modal/PointSwap'
-import { useCommonStyles } from '../../styles/use-styles'
-import SelectWalletModal from 'components/Modal/SelectWallet'
-import { useShow } from 'state/show/hook'
-import { setTermOfUse, setPrivacyPolicy, setPointSwap } from 'state/show'
-import { useAppDispatch } from '../../state'
-import { useArcadeContext } from 'hooks/useArcadeContext'
+import React, { memo } from 'react'
 import { ReactComponent as Logo } from 'assets/img/logo.svg'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    width: '100%',
-    background: `${theme.palette.text.primary}`,
-    position: 'absolute',
-    bottom: 0,
-    zIndex: 0,
-  },
-  container: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    color: theme.palette.text.secondary,
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-    [theme.breakpoints.down('sm')]: {
-      flexDirection: 'column',
-    },
-  },
-}))
 
 const Footer = () => {
-  const classes = useStyles()
-  const commonClasses = useCommonStyles()
-  const dispatch = useAppDispatch()
-  const { connectType, fullscreen } = useArcadeContext()
-  const { termOfUse, privacyPolicy, pointSwap, walletMenu } = useShow()
-
-  const handleClose = useCallback(() => {
-    dispatch(setTermOfUse(false))
-  }, [dispatch])
-
-  const handleClosePrivacy = useCallback(() => {
-    dispatch(setPrivacyPolicy(false))
-  }, [dispatch])
-
-  const handleClosePointSwap = useCallback(() => {
-    dispatch(setPointSwap(false))
-  }, [dispatch])
 
     return (
       <div className="footer" style={{backgroundImage: "url(media/footer-bg.png)"}}>

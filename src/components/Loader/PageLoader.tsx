@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Page from '../Layout/Page'
+import Page from 'components/Layout/Page'
 
 const Wrapper = styled(Page)`
   display: flex;

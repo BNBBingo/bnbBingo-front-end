@@ -14,10 +14,12 @@ import * as Wallet from 'global/wallet'
 import { setIsLoading } from 'state/show'
 import * as CONST from 'global/const'
 import numeral from 'numeral'
+import { useShow } from 'state/show/hook'
 
 
 const MyHistory: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const dispatch = useAppDispatch()
+	const { refreshInterface } = useShow();
 	const { account } = useArcadeContext();
 	const lottery = useLottery(account ?? '');
 	const [limit, setLimit] = useState(5);
@@ -66,7 +68,7 @@ const MyHistory: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, .
 
 	useEffect(() => {
 		getMyTickets();
-	}, [account, limit, offset])
+	}, [account, limit, offset, refreshInterface])
 
 	const onClickClaim = (ticketId: any, index: any) => {
 		dispatch(setIsLoading(true));

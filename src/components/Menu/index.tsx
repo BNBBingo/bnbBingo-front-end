@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import clsx from 'clsx'
 
 import { ReactComponent as Logo } from 'assets/img/logo.svg'
-import NavBarMenu from './NavBarMenu'
 import { useCommonStyles } from '../../styles/use-styles'
 
 import { ReactComponent as Wallet } from 'assets/img/wallet.svg'
