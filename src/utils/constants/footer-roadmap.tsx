@@ -7,13 +7,13 @@ const DEFAULT_FOOTER_ROADMAP = [
         link: '#',
       },
       {
-        title: 'Buy Arcade',
+        title: 'Buy BNBBingo',
         link: '#',
       },
     ],
   },
   {
-    title: 'Arcade Market',
+    title: 'BNBBingo Market',
     items: [
       {
         title: 'Sell Customized Item',

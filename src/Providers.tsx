@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Web3 from 'web3'
 
-import { ArcadeContext } from 'contexts/ArcadeContext'
+import { BNBBingoContext } from 'contexts/BNBBingoContext'
 import * as Wallet from 'global/wallet'
 import * as WalletUtils from 'global/wallet'
 import * as CONST from 'global/const'
 
-export const ArcadeProvider: React.FC = ({ children }) => {
+export const BNBBingoProvider: React.FC = ({ children }) => {
 
   const [account, setAccount] = useState<string>()
   const [web3, setWeb3] = useState<Web3>(new Web3())
@@ -73,7 +73,7 @@ export const ArcadeProvider: React.FC = ({ children }) => {
   }, [account])
 
   return  (
-    <ArcadeContext.Provider value={{
+    <BNBBingoContext.Provider value={{
       web3,
       account,
       isConnected,
@@ -85,6 +85,6 @@ export const ArcadeProvider: React.FC = ({ children }) => {
       setFullScreenMode,
     }}>
       {children}
-    </ArcadeContext.Provider>
+    </BNBBingoContext.Provider>
   )
 }

@@ -4,7 +4,7 @@ import Metamask from 'assets/img/metamask.svg'
 import Walletconnect from 'assets/img/walletconnect.svg'
 import WalletItem from 'components/Menu/WalletItem'
 import * as CONST from '../../global/const'
-import { useArcadeContext } from 'hooks/useArcadeContext'
+import { useBNBBingoContext } from 'hooks/useBNBBingoContext'
 import { setWalletMenu } from 'state/show'
 import { useAppDispatch } from 'state'
 import { isMobile } from 'react-device-detect'
@@ -18,7 +18,7 @@ declare let window: any
 
 const SelectWalletModal: React.FC<Props> = (props) => {
   const dispatch = useAppDispatch()
-  const { connectType } = useArcadeContext()
+  const { connectType } = useBNBBingoContext()
   const metaMaskDisabled = (isMobile && window.ethereum === undefined)
   const walletConnectDisabled = (isMobile && window.ethereum !== undefined)
 

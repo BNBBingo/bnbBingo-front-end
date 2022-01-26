@@ -8,7 +8,7 @@ import { Typography, Button } from '@material-ui/core'
 import { setWalletMenu } from 'state/show'
 import { useAppDispatch } from 'state'
 import { getTickets } from 'hooks/api'
-import { useArcadeContext } from 'hooks/useArcadeContext'
+import { useBNBBingoContext } from 'hooks/useBNBBingoContext'
 import { useLottery } from 'hooks/useContract'
 import * as Wallet from 'global/wallet'
 import { setIsLoading } from 'state/show'
@@ -20,7 +20,7 @@ import { useShow } from 'state/show/hook'
 const MyHistory: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const dispatch = useAppDispatch()
 	const { refreshInterface } = useShow();
-	const { account } = useArcadeContext();
+	const { account } = useBNBBingoContext();
 	const lottery = useLottery(account ?? '');
 	const [limit, setLimit] = useState(5);
 	const [offset, setOffset] = useState(0);

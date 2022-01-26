@@ -1,7 +1,7 @@
 import { createContext } from 'react'
 import Web3 from 'web3'
 
-export interface ArcadeContextValue {
+export interface BNBBingoContextValue {
   web3: Web3,
   account: string | undefined,
   isConnected: boolean,
@@ -13,5 +13,5 @@ export interface ArcadeContextValue {
   setFullScreenMode: (isSet: boolean) => void,
 }
 
-export const ArcadeContext = createContext<null | ArcadeContextValue>(null)
+export const BNBBingoContext = createContext<null | BNBBingoContextValue>(null)
 

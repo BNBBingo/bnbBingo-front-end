@@ -9,7 +9,7 @@ import { useCommonStyles } from '../../styles/use-styles'
 import { ReactComponent as Wallet } from 'assets/img/wallet.svg'
 import { setWalletMenu, setHiddenMenu } from 'state/show'
 import { useAppDispatch } from 'state'
-import { useArcadeContext } from 'hooks/useArcadeContext'
+import { useBNBBingoContext } from 'hooks/useBNBBingoContext'
 import SelectWalletModal from 'components/Modal/SelectWallet'
 import { useShow } from 'state/show/hook'
 
@@ -38,9 +38,9 @@ const Menu = () => {
   const dispatch = useAppDispatch()
   const classes = useStyles()
   const commonClasses = useCommonStyles()
-  const { fullscreen } = useArcadeContext()
+  const { fullscreen } = useBNBBingoContext()
   const { walletMenu, hiddenMenu } = useShow()
-  const { account, updateConnect, connectType } = useArcadeContext()
+  const { account, updateConnect, connectType } = useBNBBingoContext()
   const shortenString = useCallback((source: string) => {
     if (source.length <= 12) return source
   

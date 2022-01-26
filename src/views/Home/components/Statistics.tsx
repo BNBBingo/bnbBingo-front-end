@@ -6,7 +6,7 @@ import { ReactComponent as Wallet } from 'assets/img/wallet.svg'
 import { Typography, Button } from '@material-ui/core'
 import { setWalletMenu } from 'state/show'
 import { useAppDispatch } from 'state'
-import { useArcadeContext } from 'hooks/useArcadeContext'
+import { useBNBBingoContext } from 'hooks/useBNBBingoContext'
 import { useLottery } from 'hooks/useContract'
 import { useShow } from 'state/show/hook'
 import Web3 from 'web3'
@@ -16,7 +16,7 @@ import * as CONST from 'global/const'
 const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const dispatch = useAppDispatch()
   const { refreshInterface } = useShow();
-  const { account } = useArcadeContext();
+  const { account } = useBNBBingoContext();
   const lottery = useLottery(account?? '');
   const [currentRound, setCurrentRound] = useState<number|undefined>();
   const [lastRound, setLastRound] = useState<number>(0);

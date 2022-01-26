@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { ThemeProvider as MuiThemeProvider, StylesProvider } from '@material-ui/core/styles'
 
-import { ArcadeProvider } from 'Providers'
+import { BNBBingoProvider } from 'Providers'
 import theme from './styles/theme'
 import Menu from './components/Menu'
 import Footer from './components/Footer'
@@ -16,7 +16,7 @@ const Home = lazy(() => import('./views/Home'))
 const App: React.FunctionComponent = () => {
  
   return (
-    <ArcadeProvider>
+    <BNBBingoProvider>
       <RefreshContextProvider>
         <MuiThemeProvider theme={theme}>
           <ThemeProvider theme={theme}>
@@ -35,7 +35,7 @@ const App: React.FunctionComponent = () => {
           </ThemeProvider>
         </MuiThemeProvider>
       </RefreshContextProvider>
-    </ArcadeProvider>
+    </BNBBingoProvider>
   )
 }
 

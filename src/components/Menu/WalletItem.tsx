@@ -1,6 +1,6 @@
 import React from 'react'
 import WltSwitchButton from 'components/Button/WltSwitchButton'
-import { useArcadeContext } from 'hooks/useArcadeContext'
+import { useBNBBingoContext } from 'hooks/useBNBBingoContext'
 import { setWalletMenu } from 'state/show'
 import { useAppDispatch } from 'state'
 import { arcadeAlert } from 'utils/arcadealert'
@@ -18,7 +18,7 @@ interface Props {
 
 const WalletItem: React.FC<Props> = (props) => {
   const dispatch = useAppDispatch()
-  const { connectWallet, disconnectWallet } = useArcadeContext()
+  const { connectWallet, disconnectWallet } = useBNBBingoContext()
   
   const switchHandler = async () => {
     if (props.disabled === true) return

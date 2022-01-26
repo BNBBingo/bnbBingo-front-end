@@ -5,7 +5,7 @@ import { setWalletMenu } from 'state/show'
 import { useAppDispatch } from 'state'
 import * as Wallet from 'global/wallet'
 import Swal from 'sweetalert2'
-import { useArcadeContext } from 'hooks/useArcadeContext'
+import { useBNBBingoContext } from 'hooks/useBNBBingoContext'
 import { useLottery } from 'hooks/useContract'
 import Web3 from 'web3'
 import BigNumber from 'bignumber.js'
@@ -14,7 +14,7 @@ import numeral from 'numeral'
 
 const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const dispatch = useAppDispatch()
-  const { account, web3 } = useArcadeContext();
+  const { account, web3 } = useBNBBingoContext();
   const lottery = useLottery(account ?? '');
   const [currentPrize, setCurrentPrize] = useState<BigNumber>();
   const [duration, setDuration] = useState(0);
