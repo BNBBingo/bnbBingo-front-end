@@ -74,6 +74,7 @@ export interface ShowState {
   hiddenMenu: string,
   discussionRule: boolean,
   commentState: number,
+  refreshInterface: boolean
 }
 
 export interface SwapState {
