@@ -14,7 +14,7 @@ import numeral from 'numeral'
 
 const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const dispatch = useAppDispatch()
-  const { account } = useArcadeContext();
+  const { account, web3 } = useArcadeContext();
   const lottery = useLottery(account ?? '');
   const [currentPrize, setCurrentPrize] = useState<BigNumber>();
   const [duration, setDuration] = useState(0);
@@ -57,19 +57,39 @@ const Banner: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...p
     }
 
     dispatch(setIsLoading(true));
-    Wallet.sendTransactionWithValue(
-        lottery.methods.buyTicket(numbers), 
-        account, 
-        Web3.utils.toWei(process.env.REACT_APP_LOTTERY_PRICE + '', 'ether'))
-        .then((res: any) => {
-            dispatch(setIsLoading(false));
-            Swal.fire("Successfuly bought new ticket!");
+    lottery.methods.buyTicket(numbers).estimateGas({
+        from: account,
+        value: Web3.utils.toWei(process.env.REACT_APP_LOTTERY_PRICE + '', 'ether')
+    })
+    .then((gasAmount: any) => {
+        lottery.methods.buyTicket(numbers).send({
+            from: account,
+            value: Web3.utils.toWei(process.env.REACT_APP_LOTTERY_PRICE + '', 'ether'),
+            gas: gasAmount
         })
-        .catch((ex) => {
+        .on('transactionHash', function(hash: any){
+            console.log(hash);
+            const getTransaction = () => {
+                web3.eth.getTransaction(hash)
+                .then((res: any) => {
+                    if (res.blockNumber !== undefined) {
+                        dispatch(setIsLoading(false));
+                        Swal.fire("Successfuly bought new ticket!");
+                    } else {
+                        setTimeout(getTransaction, 1000);
+                    }
+                })
+                
+            }
+
+            getTransaction();
+        })
+        .on('error', function(error: any, receipt: any) { 
             dispatch(setIsLoading(false));
             Swal.fire("New ticket purchase failed!");
-            console.log(ex);
-        })
+            console.log(error);
+        });
+    })
   }
 
   const getCurrentPrize = () => {
