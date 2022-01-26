@@ -15,7 +15,9 @@ export const ArcadeProvider: React.FC = ({ children }) => {
   const [fullscreen, setFullscreen] = useState<boolean>(false)
   
   const getWeb3 = async () => {
-    const provider = await Wallet.getCurrentProvider()
+    let provider = await Wallet.getCurrentProvider()
+    if (provider === null)
+      provider = Web3.givenProvider
     const web3 = new Web3(provider)
     return web3
   }

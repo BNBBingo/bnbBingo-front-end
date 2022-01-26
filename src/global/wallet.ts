@@ -5,6 +5,7 @@ import * as CONST from './const'
 import { ethers } from 'ethers'
 import axios from 'axios'
 import { arcadeAlert } from 'utils/arcadealert'
+import { isWindows } from 'react-device-detect'
 
 declare let window: any
 
@@ -134,9 +135,7 @@ export const getCurrentWallet = async () => {
 
   if (walletType === null) return null
   if (connected === null || connected === 0) return null
-
-  
-
+ 
   if (walletType === CONST.WALLET_TYPE.METAMASK) {
     if (
       parseInt(process.env.REACT_APP_CHAIN_ID as string, 10) !== parseInt(await getCurrentChainId() as string, 16)
@@ -203,6 +202,10 @@ export const isConnected = async (): Promise<boolean> => {
   if (address === null || address === '' || provider === null || chainId === null) {
     return false
   }
+
+  provider.on('accountsChanged', (accounts: string) => {
+    document.location.reload();
+  })
 
   chainId = Number.parseInt(chainId.toString())
 

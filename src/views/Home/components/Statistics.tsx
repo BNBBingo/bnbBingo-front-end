@@ -77,8 +77,6 @@ const Statistics: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, 
   }, [currentRound])
 
   useEffect(() => {
-    // if (!account) return;
-
     getCurrentRound();
   }, [])
 

@@ -97,6 +97,9 @@ export const useGameUserInfo = (address: string | undefined) => {
 export const useLottery = (address: string) => {
   const { web3 } = useArcadeContext() 
   return useMemo(() => {
-    return new web3.eth.Contract(LOTTERY_ABI as AbiItem[], process.env.REACT_APP_LOTTERY_ADDRESS, { from: address })
+    if (address)
+      return new web3.eth.Contract(LOTTERY_ABI as AbiItem[], process.env.REACT_APP_LOTTERY_ADDRESS, { from: address })
+    else
+      return new web3.eth.Contract(LOTTERY_ABI as AbiItem[], process.env.REACT_APP_LOTTERY_ADDRESS)
   }, [web3, address])
 }
